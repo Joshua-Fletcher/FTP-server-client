@@ -22,7 +22,6 @@ def handle_request(connection_socket):
 
         if command.upper() == "QUIT":
             connection_socket.close()
-            server_socket.close()
 
         elif "CONNECT" in command.upper():
             connect_request_array = command.split() 
@@ -85,9 +84,7 @@ def handle_request(connection_socket):
             connection_socket, addr = server_socket.accept()
 
     connection_socket.close()
-    server_socket.close()
 
 while True:
     connection_socket, addr = server_socket.accept()
     threading.Thread(target=handle_request, args=(connection_socket,)).start()
-    server_socket.close()
